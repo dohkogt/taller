@@ -1,4 +1,16 @@
 Taller::Application.routes.draw do
+  resources :serviciorepuestos
+
+  resources :ordendetalles
+
+  resources :estados
+
+  resources :ordenes
+
+  resources :citas
+
+  resources :vehiculos
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
