@@ -7,19 +7,30 @@ class MainController < ApplicationController
       @error_code = 500
       @error_description = "Numero de cita invalido"
     else
-      @orden = Orden.new(:cita_id => @cita[0].id,
-                         :estado_id => Orden::ESTADO_RECIBIDO)
+      #buscar si ya existe
+      @orden = Orden.where(:cita_id => @cita[0].id)
+      
+      if @orden.empty?
+        #crear orden
+        @orden = Orden.new(:cita_id => @cita[0].id,
+                           :estado_id => Orden::ESTADO_RECIBIDO)
 
-      unless @orden.save
+        unless @orden.save
+          @error_code = 500
+          @error_description = "Error al crear orden. #{@orden.errors}"       
+        end
+        
+      else
         @error_code = 500
-        @error_description = "Error al crear orden. #{@orden.errors}"       
+        @error_description = "Cita ya ha sido ingresada."
       end
+      
     end
 
     respond_to do |format|
       format.xml
     end
-        
+    
   end
 
 

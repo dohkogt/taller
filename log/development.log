@@ -755,3 +755,37 @@ Started GET "/recibirvehiculo/1.xml" for 127.0.0.1 at Fri Nov 12 15:42:49 -0600 
   [1m[35mSQL (0.7ms)[0m  INSERT INTO "ordenes" ("cita_id", "created_at", "estado_id", "updated_at") VALUES (1, '2010-11-12 21:42:49.552507', 1, '2010-11-12 21:42:49.552507')
 Rendered main/create_orden.xml.builder (10.5ms)
 Completed 200 OK in 328ms (Views: 17.2ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/recibirvehiculo/1.xml" for 127.0.0.1 at Fri Nov 12 16:03:45 -0600 2010
+  Processing by MainController#create_orden as XML
+  Parameters: {"cita_id"=>"1"}
+  [1m[36mSQL (1.3ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.4ms)[0m  SELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "citas" WHERE (id = '1')) AS subquery
+  [1m[36mSQL (0.5ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+Completed   in 224ms
+
+NoMethodError (undefined method `validates_uniqueness_or' for #<Class:0x7f8a18a403e0>):
+  app/models/orden.rb:8
+  app/controllers/main_controller.rb:11:in `create_orden'
+
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (6.8ms)
+  [1m[35mCita Load (0.4ms)[0m  SELECT "citas".* FROM "citas" WHERE (id = '1')
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (12.9ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (26.2ms)
+
+
+Started GET "/recibirvehiculo/1.xml" for 127.0.0.1 at Fri Nov 12 16:03:54 -0600 2010
+  Processing by MainController#create_orden as XML
+  Parameters: {"cita_id"=>"1"}
+  [1m[36mSQL (0.3ms)[0m  [1mSELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "citas" WHERE (id = '1')) AS subquery[0m
+  [1m[35mCita Load (0.3ms)[0m  SELECT "citas".* FROM "citas" WHERE (id = '1')
+  [1m[36mSQL (0.4ms)[0m  [1mSELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "ordenes" WHERE ("ordenes"."cita_id" = 1)) AS subquery[0m
+Rendered main/create_orden.xml.builder (138.0ms)
+Completed 200 OK in 204ms (Views: 142.7ms | ActiveRecord: 3.6ms)
