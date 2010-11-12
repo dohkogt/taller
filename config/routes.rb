@@ -1,8 +1,12 @@
 Taller::Application.routes.draw do
   
-  match 'nuevacita/:placa/:fecha/:hora' => 'citas#create'
-  match 'consultarfechahora/:fecha/:hora(.:format)' => 'citas#find'
-  match 'consultarfecha/:fecha(.:format)' => 'citas#find'
+  get "main/index"
+
+  match 'nuevacita/:placa/:fecha/:hora' => 'main#create_cita'
+  match 'consultarfechahora/:fecha/:hora(.:format)' => 'main#find_cita'
+  match 'consultarfecha/:fecha(.:format)' => 'main#find_cita'
+
+  match 'recibirvehiculo/:cita_id(.:format)' => 'main#create_orden'
   
   #resources :serviciorepuestos
 

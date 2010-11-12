@@ -641,3 +641,117 @@ Started GET "/consultarfecha/31-12-2010.xml" for 127.0.0.1 at Fri Nov 12 14:21:0
   [1m[35mCita Load (0.6ms)[0m  SELECT hora FROM "citas" WHERE (fecha = '2010-12-31')
 Rendered citas/find.xml.builder (3.3ms)
 Completed 200 OK in 31ms (Views: 7.8ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/recibirvehiculo/45.xml" for 127.0.0.1 at Fri Nov 12 15:30:58 -0600 2010
+  Processing by MainController#create_orden as XML
+  Parameters: {"cita_id"=>"45"}
+  [1m[36mSQL (1.0ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mCita Load (0.3ms)[0m  SELECT "citas".* FROM "citas" WHERE ("citas"."id" = 45) LIMIT 1
+Completed   in 157ms
+
+ActiveRecord::RecordNotFound (Couldn't find Cita with ID=45):
+  app/controllers/main_controller.rb:5:in `create_orden'
+
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.8ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (7.2ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (14.8ms)
+
+
+Started GET "/recibirvehiculo/45.xml" for 127.0.0.1 at Fri Nov 12 15:38:07 -0600 2010
+  Processing by MainController#create_orden as XML
+  Parameters: {"cita_id"=>"45"}
+  [1m[36mCita Load (0.3ms)[0m  [1mSELECT "citas".* FROM "citas" WHERE (id = '45') LIMIT 1[0m
+Completed   in 39ms
+
+RuntimeError (Called id for nil, which would mistakenly be 4 -- if you really wanted the id of nil, use object_id):
+  app/controllers/main_controller.rb:10:in `create_orden'
+
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.6ms)
+  [1m[35mCita Load (0.5ms)[0m  SELECT "citas".* FROM "citas" WHERE (id = '45')
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (10.0ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (17.1ms)
+
+
+Started GET "/recibirvehiculo/45.xml" for 127.0.0.1 at Fri Nov 12 15:40:26 -0600 2010
+  Processing by MainController#create_orden as XML
+  Parameters: {"cita_id"=>"45"}
+  [1m[36mCita Load (0.6ms)[0m  [1mSELECT "citas".* FROM "citas" WHERE (id = '45') LIMIT 1[0m
+Completed   in 134ms
+
+RuntimeError (Called id for nil, which would mistakenly be 4 -- if you really wanted the id of nil, use object_id):
+  app/controllers/main_controller.rb:10:in `create_orden'
+
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.0ms)
+  [1m[35mCita Load (0.6ms)[0m  SELECT "citas".* FROM "citas" WHERE (id = '45')
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (10.6ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (18.3ms)
+
+
+Started GET "/recibirvehiculo/45.xml" for 127.0.0.1 at Fri Nov 12 15:40:46 -0600 2010
+  Processing by MainController#create_orden as XML
+  Parameters: {"cita_id"=>"45"}
+  [1m[36mCita Load (0.3ms)[0m  [1mSELECT "citas".* FROM "citas" WHERE (id = '45')[0m
+Completed   in 30ms
+
+RuntimeError (Called id for nil, which would mistakenly be 4 -- if you really wanted the id of nil, use object_id):
+  app/controllers/main_controller.rb:10:in `create_orden'
+
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.7ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (6.9ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (18.9ms)
+
+
+Started GET "/recibirvehiculo/45.xml" for 127.0.0.1 at Fri Nov 12 15:41:04 -0600 2010
+  Processing by MainController#create_orden as XML
+  Parameters: {"cita_id"=>"45"}
+  [1m[35mCita Load (0.6ms)[0m  SELECT "citas".* FROM "citas" WHERE (id = '45')
+Completed   in 19ms
+
+RuntimeError ([]):
+  app/controllers/main_controller.rb:10:in `create_orden'
+
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.7ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (7.0ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (14.3ms)
+
+
+Started GET "/recibirvehiculo/45.xml" for 127.0.0.1 at Fri Nov 12 15:41:24 -0600 2010
+  Processing by MainController#create_orden as XML
+  Parameters: {"cita_id"=>"45"}
+  [1m[36mSQL (0.3ms)[0m  [1mSELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "citas" WHERE (id = '45')) AS subquery[0m
+Completed   in 26ms
+
+ActionView::MissingTemplate (Missing template main/create_orden with {:handlers=>[:rjs, :rhtml, :erb, :rxml, :builder], :locale=>[:en, :en], :formats=>[:xml]} in view paths "/home/javier/Documents/Projects/taller/app/views"):
+  app/controllers/main_controller.rb:19:in `create_orden'
+
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/missing_template.erb within rescues/layout (3.6ms)
+
+
+Started GET "/recibirvehiculo/45.xml" for 127.0.0.1 at Fri Nov 12 15:41:57 -0600 2010
+  Processing by MainController#create_orden as XML
+  Parameters: {"cita_id"=>"45"}
+  [1m[35mSQL (0.3ms)[0m  SELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "citas" WHERE (id = '45')) AS subquery
+Rendered main/create_orden.xml.builder (40.6ms)
+Completed 200 OK in 183ms (Views: 52.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/recibirvehiculo/45.xml" for 127.0.0.1 at Fri Nov 12 15:42:38 -0600 2010
+  Processing by MainController#create_orden as XML
+  Parameters: {"cita_id"=>"45"}
+  [1m[36mSQL (0.3ms)[0m  [1mSELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "citas" WHERE (id = '45')) AS subquery[0m
+Rendered main/create_orden.xml.builder (3.0ms)
+Completed 200 OK in 26ms (Views: 7.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/recibirvehiculo/1.xml" for 127.0.0.1 at Fri Nov 12 15:42:49 -0600 2010
+  Processing by MainController#create_orden as XML
+  Parameters: {"cita_id"=>"1"}
+  [1m[35mSQL (0.3ms)[0m  SELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "citas" WHERE (id = '1')) AS subquery
+  [1m[36mCita Load (0.5ms)[0m  [1mSELECT "citas".* FROM "citas" WHERE (id = '1')[0m
+  [1m[35mSQL (0.7ms)[0m  INSERT INTO "ordenes" ("cita_id", "created_at", "estado_id", "updated_at") VALUES (1, '2010-11-12 21:42:49.552507', 1, '2010-11-12 21:42:49.552507')
+Rendered main/create_orden.xml.builder (10.5ms)
+Completed 200 OK in 328ms (Views: 17.2ms | ActiveRecord: 1.4ms)

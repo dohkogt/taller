@@ -5,10 +5,7 @@ unless @error_code.nil?
     xml.descripcion @error_description
  end
 else
-  xml.cita do
-    xml.id @cita.id
-    xml.hora @cita.hora
-    xml.cliente_id @cita.cliente_id
-    xml.estados_id @cita.estados_id
+  xml.respuesta_recepcion_vehiculo do
+    xml.id_orden @orden.id
   end
 end
