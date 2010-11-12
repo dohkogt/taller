@@ -1,83 +1,72 @@
 class CitasController < ApplicationController
-  # GET /citas
-  # GET /citas.xml
-  def index
-    @citas = Cita.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @citas }
-    end
-  end
-
-  # GET /citas/1
-  # GET /citas/1.xml
-  def show
-    @cita = Cita.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @cita }
-    end
-  end
-
-  # GET /citas/new
-  # GET /citas/new.xml
-  def new
-    @cita = Cita.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @cita }
-    end
-  end
-
-  # GET /citas/1/edit
-  def edit
-    @cita = Cita.find(params[:id])
-  end
-
-  # POST /citas
-  # POST /citas.xml
+  
+  # GET http://localhost:3000/nuevacita/122brw/31-12-2010/15.xml
+  # placa = 122brw
+  # fecha = 31-12-2010
+  # hora = 15 ~= 3PM
   def create
-    @cita = Cita.new(params[:cita])
+
+    c_placa = params[:placa].upcase
+    c_fecha = params[:fecha]
+    c_hora = params[:hora]
+    
+    # buscar si vehiculo existe
+    @vehiculo = Vehiculo.find_by_placa(c_placa)
+
+    if @vehiculo.nil?
+      #crear nuevo vehiculo
+      @vehiculo = Vehiculo.new(:placa => c_placa)
+      unless @vehiculo.save
+        @error_code = 500
+        @error_description = "Error al crear vehiculo. #{@vehiculo.errors}"
+      end            
+    end
+
+    @cita = Cita.new(:fecha => Date.parse(c_fecha),
+                     :hora => c_hora.to_i,
+                     :cliente_id => @vehiculo.id,
+                     :estados_id => 1)
+
+    unless @cita.save
+      @error_code = 500
+      @error_description = "Error al crear cita. #{@cita.errors}"
+    end
 
     respond_to do |format|
-      if @cita.save
-        format.html { redirect_to(@cita, :notice => 'Cita was successfully created.') }
-        format.xml  { render :xml => @cita, :status => :created, :location => @cita }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @cita.errors, :status => :unprocessable_entity }
+      format.xml
+    end
+    
+  end
+
+  # GET http://locahost:3000/consultarfechahora/31-12-2010/15.xml
+  # GET http://locahost:3000/consultafecha/31-12-2010.xml
+  # fecha = 31-12-2010
+  # hora = 15 ~= 3PM
+  def find
+    d_fecha = Date.parse(params[:fecha])
+
+    unless params[:hora].nil?      
+      i_hora = params[:hora].to_i
+      citas = Cita.where("fecha = ? and hora = ?", d_fecha, i_hora).count
+      # 1 : ocupado
+      # 0 : libre
+      @disponible = citas > 0 ? 1 : 0
+    else
+      citas = Cita.select('hora').where("fecha = ?", d_fecha)
+
+      @horaslibres = ["8", "9", "10", "11", "12", "13", "14", "15", "16", "17"]
+      for cita in citas
+        @horaslibres.delete(cita.hora.to_s)
       end
     end
-  end
-
-  # PUT /citas/1
-  # PUT /citas/1.xml
-  def update
-    @cita = Cita.find(params[:id])
+    
 
     respond_to do |format|
-      if @cita.update_attributes(params[:cita])
-        format.html { redirect_to(@cita, :notice => 'Cita was successfully updated.') }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @cita.errors, :status => :unprocessable_entity }
-      end
+      format.xml
     end
   end
 
-  # DELETE /citas/1
-  # DELETE /citas/1.xml
-  def destroy
-    @cita = Cita.find(params[:id])
-    @cita.destroy
 
-    respond_to do |format|
-      format.html { redirect_to(citas_url) }
-      format.xml  { head :ok }
-    end
-  end
+  
+
 end

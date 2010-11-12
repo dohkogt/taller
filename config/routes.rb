@@ -1,15 +1,20 @@
 Taller::Application.routes.draw do
-  resources :serviciorepuestos
+  
+  match 'nuevacita/:placa/:fecha/:hora' => 'citas#create'
+  match 'consultarfechahora/:fecha/:hora(.:format)' => 'citas#find'
+  match 'consultarfecha/:fecha(.:format)' => 'citas#find'
+  
+  #resources :serviciorepuestos
 
-  resources :ordendetalles
+  #resources :ordendetalles
 
-  resources :estados
+  #resources :estados
 
-  resources :ordenes
+  #resources :ordenes
 
-  resources :citas
 
-  resources :vehiculos
+
+  #resources :vehiculos
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

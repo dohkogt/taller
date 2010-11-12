@@ -1,0 +1,643 @@
+  [1m[36mSQL (0.6ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.2ms)[0m  select sqlite_version(*)
+  [1m[36mSQL (110.5ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [1m[35mSQL (0.3ms)[0m  PRAGMA index_list("schema_migrations")
+  [1m[36mSQL (98.2ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35mSQL (0.7ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.7ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.6ms)[0m  SELECT "schema_migrations"."version" FROM "schema_migrations"
+Migrating to CreateVehiculos (20101111184459)
+  [1m[36mSQL (1.7ms)[0m  [1mCREATE TABLE "vehiculos" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "placa" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20101111184459')
+Migrating to CreateCitas (20101111184522)
+  [1m[36mSQL (1.4ms)[0m  [1mCREATE TABLE "citas" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "fecha" date, "hora" integer, "cliente_id" integer, "estados_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.7ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20101111184522')
+Migrating to CreateOrdenes (20101111184532)
+  [1m[36mSQL (1.5ms)[0m  [1mCREATE TABLE "ordenes" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "cita_id" integer, "estado_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (11.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20101111184532')
+Migrating to CreateEstados (20101111184540)
+  [1m[36mSQL (0.7ms)[0m  [1mCREATE TABLE "estados" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "nombre" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20101111184540')
+Migrating to CreateOrdendetalles (20101111184901)
+  [1m[36mSQL (16.2ms)[0m  [1mCREATE TABLE "ordendetalles" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "orden_id" integer, "servicio_id" integer, "descripcion" text, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (1.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20101111184901')
+Migrating to CreateServiciorepuestos (20101111184917)
+  [1m[36mSQL (0.6ms)[0m  [1mCREATE TABLE "serviciorepuestos" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "orden_detalle_id" integer, "repuesto_id" integer, "cantidad" integer, "costo" decimal, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20101111184917')
+  [1m[36mSQL (0.5ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.4ms)[0m  SELECT "schema_migrations"."version" FROM "schema_migrations"
+  [1m[36mSQL (0.4ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.1ms)[0m  PRAGMA index_list("citas")
+  [1m[36mSQL (0.1ms)[0m  [1mPRAGMA index_list("estados")[0m
+  [1m[35mSQL (0.1ms)[0m  PRAGMA index_list("ordendetalles")
+  [1m[36mSQL (0.1ms)[0m  [1mPRAGMA index_list("ordenes")[0m
+  [1m[35mSQL (0.1ms)[0m  PRAGMA index_list("serviciorepuestos")
+  [1m[36mSQL (0.1ms)[0m  [1mPRAGMA index_list("vehiculos")[0m
+
+
+Started GET "/citas" for 127.0.0.1 at Fri Nov 12 12:20:21 -0600 2010
+  Processing by CitasController#index as HTML
+  [1m[36mSQL (1.0ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mCita Load (0.3ms)[0m  SELECT "citas".* FROM "citas"
+Rendered citas/index.html.erb within layouts/application (5.3ms)
+Completed 200 OK in 151ms (Views: 13.2ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/nuevacita/1/31-12-2010/15" for 127.0.0.1 at Fri Nov 12 12:25:05 -0600 2010
+  Processing by CitasController#create as HTML
+  Parameters: {"hora"=>"15", "method"=>:get, "cliente_id"=>"1", "fecha"=>"31-12-2010"}
+Completed   in 1ms
+
+RuntimeError (hello):
+  app/controllers/citas_controller.rb:43:in `create'
+
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.8ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (133.2ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (141.6ms)
+
+
+Started GET "/nuevacita/122bwr/31-12-2010/15" for 127.0.0.1 at Fri Nov 12 12:28:30 -0600 2010
+  Processing by CitasController#create as HTML
+  Parameters: {"hora"=>"15", "placa"=>"122bwr", "fecha"=>"31-12-2010"}
+  [1m[36mVehiculo Load (0.3ms)[0m  [1mSELECT "vehiculos".* FROM "vehiculos" WHERE ("vehiculos"."placa" = '122BWR') LIMIT 1[0m
+Completed   in 32ms
+
+NoMethodError (You have a nil object when you didn't expect it!
+You might have expected an instance of Array.
+The error occurred while evaluating nil.first):
+  app/controllers/citas_controller.rb:45:in `create'
+
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.7ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (7.3ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (14.7ms)
+
+
+Started GET "/nuevacita/122bwr/31-12-2010/15" for 127.0.0.1 at Fri Nov 12 12:28:43 -0600 2010
+  Processing by CitasController#create as HTML
+  Parameters: {"hora"=>"15", "placa"=>"122bwr", "fecha"=>"31-12-2010"}
+  [1m[35mVehiculo Load (0.3ms)[0m  SELECT "vehiculos".* FROM "vehiculos" WHERE ("vehiculos"."placa" = '122BWR') LIMIT 1
+Completed   in 17ms
+
+NoMethodError (You have a nil object when you didn't expect it!
+You might have expected an instance of Array.
+The error occurred while evaluating nil.first):
+  app/controllers/citas_controller.rb:45:in `create'
+
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.7ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (7.2ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (14.5ms)
+
+
+Started GET "/nuevacita/122bwr/31-12-2010/15" for 127.0.0.1 at Fri Nov 12 12:28:47 -0600 2010
+  Processing by CitasController#create as HTML
+  Parameters: {"hora"=>"15", "placa"=>"122bwr", "fecha"=>"31-12-2010"}
+  [1m[36mVehiculo Load (0.3ms)[0m  [1mSELECT "vehiculos".* FROM "vehiculos" WHERE ("vehiculos"."placa" = '122BWR') LIMIT 1[0m
+Completed   in 17ms
+
+NoMethodError (You have a nil object when you didn't expect it!
+You might have expected an instance of Array.
+The error occurred while evaluating nil.first):
+  app/controllers/citas_controller.rb:45:in `create'
+
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.7ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (7.5ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (15.0ms)
+
+
+Started GET "/nuevacita/122bwr/31-12-2010/15" for 127.0.0.1 at Fri Nov 12 12:29:39 -0600 2010
+  Processing by CitasController#create as HTML
+  Parameters: {"hora"=>"15", "placa"=>"122bwr", "fecha"=>"31-12-2010"}
+  [1m[35mVehiculo Load (0.3ms)[0m  SELECT "vehiculos".* FROM "vehiculos" WHERE ("vehiculos"."placa" = '122BWR') LIMIT 1
+Completed   in 14ms
+
+RuntimeError (no existe):
+  app/controllers/citas_controller.rb:48:in `create'
+
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.7ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (7.3ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (16.4ms)
+
+
+Started GET "/nuevacita/122bwr/31-12-2010/15" for 127.0.0.1 at Fri Nov 12 12:33:27 -0600 2010
+  Processing by CitasController#create as HTML
+  Parameters: {"hora"=>"15", "placa"=>"122bwr", "fecha"=>"31-12-2010"}
+  [1m[36mVehiculo Load (0.3ms)[0m  [1mSELECT "vehiculos".* FROM "vehiculos" WHERE ("vehiculos"."placa" = '122BWR') LIMIT 1[0m
+Completed   in 22ms
+
+RuntimeError (#<Vehiculo id: nil, placa: "122BWR", created_at: nil, updated_at: nil>):
+  app/controllers/citas_controller.rb:54:in `create'
+
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.6ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (113.9ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (121.5ms)
+
+
+Started GET "/nuevacita/122bwr/31-12-2010/15" for 127.0.0.1 at Fri Nov 12 12:36:51 -0600 2010
+  Processing by CitasController#create as HTML
+  Parameters: {"hora"=>"15", "placa"=>"122bwr", "fecha"=>"31-12-2010"}
+  [1m[35mVehiculo Load (0.3ms)[0m  SELECT "vehiculos".* FROM "vehiculos" WHERE ("vehiculos"."placa" = '122BWR') LIMIT 1
+  [1m[36mVehiculo Load (0.3ms)[0m  [1mSELECT "vehiculos"."id" FROM "vehiculos" WHERE ("vehiculos"."placa" = '122BWR') LIMIT 1[0m
+Completed   in 44ms
+
+RuntimeError (#<Vehiculo id: nil, placa: "122BWR", created_at: nil, updated_at: nil>):
+  app/controllers/citas_controller.rb:55:in `create'
+
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.0ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (8.3ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (17.2ms)
+
+
+Started GET "/nuevacita/122bwr/31-12-2010/15" for 127.0.0.1 at Fri Nov 12 12:41:26 -0600 2010
+  Processing by CitasController#create as HTML
+  Parameters: {"hora"=>"15", "placa"=>"122bwr", "fecha"=>"31-12-2010"}
+  [1m[35mVehiculo Load (0.3ms)[0m  SELECT "vehiculos".* FROM "vehiculos" WHERE ("vehiculos"."placa" = '122BWR') LIMIT 1
+Completed   in 41ms
+
+ActionView::MissingTemplate (Missing template citas/create with {:handlers=>[:rxml, :erb, :rjs, :rhtml, :builder], :locale=>[:en, :en], :formats=>[:html]} in view paths "/home/javier/Documents/Projects/taller/app/views"):
+  app/controllers/citas_controller.rb:55:in `create'
+
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/missing_template.erb within rescues/layout (0.9ms)
+
+
+Started GET "/nuevacita/1/31-12-2010/15" for 127.0.0.1 at Fri Nov 12 12:42:41 -0600 2010
+  Processing by CitasController#create as HTML
+  Parameters: {"hora"=>"15", "placa"=>"1", "fecha"=>"31-12-2010"}
+  [1m[36mVehiculo Load (0.3ms)[0m  [1mSELECT "vehiculos".* FROM "vehiculos" WHERE ("vehiculos"."placa" = '1') LIMIT 1[0m
+Completed   in 25ms
+
+ActionView::MissingTemplate (Missing template citas/create with {:handlers=>[:rxml, :erb, :rjs, :rhtml, :builder], :locale=>[:en, :en], :formats=>[:html]} in view paths "/home/javier/Documents/Projects/taller/app/views"):
+  app/controllers/citas_controller.rb:55:in `create'
+
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/missing_template.erb within rescues/layout (1.1ms)
+
+
+Started GET "/nuevacita/1/31-12-2010/15" for 127.0.0.1 at Fri Nov 12 12:46:35 -0600 2010
+  Processing by CitasController#create as HTML
+  Parameters: {"hora"=>"15", "placa"=>"1", "fecha"=>"31-12-2010"}
+  [1m[35mVehiculo Load (0.3ms)[0m  SELECT "vehiculos".* FROM "vehiculos" WHERE ("vehiculos"."placa" = '1') LIMIT 1
+Completed 200 OK in 51ms (Views: 2.4ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/nuevacita/1/31-12-2010/15.xml" for 127.0.0.1 at Fri Nov 12 12:47:05 -0600 2010
+  Processing by CitasController#create as XML
+  Parameters: {"hora"=>"15", "placa"=>"1", "fecha"=>"31-12-2010"}
+  [1m[36mVehiculo Load (0.7ms)[0m  [1mSELECT "vehiculos".* FROM "vehiculos" WHERE ("vehiculos"."placa" = '1') LIMIT 1[0m
+Completed 200 OK in 55ms (Views: 5.6ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/nuevacita/1/31-12-2010/15" for 127.0.0.1 at Fri Nov 12 12:47:10 -0600 2010
+  Processing by CitasController#create as HTML
+  Parameters: {"hora"=>"15", "placa"=>"1", "fecha"=>"31-12-2010"}
+  [1m[35mVehiculo Load (0.3ms)[0m  SELECT "vehiculos".* FROM "vehiculos" WHERE ("vehiculos"."placa" = '1') LIMIT 1
+Completed 200 OK in 131ms (Views: 3.3ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/nuevacita/1/31-12-2010/15" for 127.0.0.1 at Fri Nov 12 12:47:42 -0600 2010
+  Processing by CitasController#create as HTML
+  Parameters: {"hora"=>"15", "placa"=>"1", "fecha"=>"31-12-2010"}
+  [1m[36mVehiculo Load (0.3ms)[0m  [1mSELECT "vehiculos".* FROM "vehiculos" WHERE ("vehiculos"."placa" = '1') LIMIT 1[0m
+Completed 200 OK in 36ms (Views: 2.4ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/nuevacita/1/31-12-2010/15" for 127.0.0.1 at Fri Nov 12 12:48:49 -0600 2010
+  Processing by CitasController#create as HTML
+  Parameters: {"hora"=>"15", "placa"=>"1", "fecha"=>"31-12-2010"}
+  [1m[35mVehiculo Load (0.3ms)[0m  SELECT "vehiculos".* FROM "vehiculos" WHERE ("vehiculos"."placa" = '1') LIMIT 1
+Completed 406 Not Acceptable in 19ms
+
+
+Started GET "/nuevacita/1/31-12-2010/15.xml" for 127.0.0.1 at Fri Nov 12 12:48:58 -0600 2010
+  Processing by CitasController#create as XML
+  Parameters: {"hora"=>"15", "placa"=>"1", "fecha"=>"31-12-2010"}
+  [1m[36mVehiculo Load (0.3ms)[0m  [1mSELECT "vehiculos".* FROM "vehiculos" WHERE ("vehiculos"."placa" = '1') LIMIT 1[0m
+Completed 200 OK in 35ms (Views: 2.0ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/nuevacita/1/31-12-2010/15.xml" for 127.0.0.1 at Fri Nov 12 12:50:57 -0600 2010
+  Processing by CitasController#create as XML
+  Parameters: {"hora"=>"15", "placa"=>"1", "fecha"=>"31-12-2010"}
+  [1m[35mVehiculo Load (0.3ms)[0m  SELECT "vehiculos".* FROM "vehiculos" WHERE ("vehiculos"."placa" = '1') LIMIT 1
+Completed 200 OK in 135ms (Views: 2.3ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/nuevacita/1/31-12-2010/15.xml" for 127.0.0.1 at Fri Nov 12 12:51:11 -0600 2010
+  Processing by CitasController#create as XML
+  Parameters: {"hora"=>"15", "placa"=>"1", "fecha"=>"31-12-2010"}
+  [1m[36mVehiculo Load (0.3ms)[0m  [1mSELECT "vehiculos".* FROM "vehiculos" WHERE ("vehiculos"."placa" = '1') LIMIT 1[0m
+Completed 200 OK in 22ms (Views: 2.0ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/nuevacita/1/31-12-2010/15.xml" for 127.0.0.1 at Fri Nov 12 12:54:19 -0600 2010
+  Processing by CitasController#create as XML
+  Parameters: {"hora"=>"15", "placa"=>"1", "fecha"=>"31-12-2010"}
+  [1m[35mVehiculo Load (0.7ms)[0m  SELECT "vehiculos".* FROM "vehiculos" WHERE ("vehiculos"."placa" = '1') LIMIT 1
+Rendered text template (0.0ms)
+Completed 200 OK in 87ms (Views: 35.0ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/nuevacita/1/31-12-2010/15.xml" for 127.0.0.1 at Fri Nov 12 13:05:13 -0600 2010
+  Processing by CitasController#create as XML
+  Parameters: {"hora"=>"15", "placa"=>"1", "fecha"=>"31-12-2010"}
+  [1m[36mVehiculo Load (0.7ms)[0m  [1mSELECT "vehiculos".* FROM "vehiculos" WHERE ("vehiculos"."placa" = '1') LIMIT 1[0m
+Rendered citas/create.xml.builder (299.3ms)
+Completed 200 OK in 362ms (Views: 310.2ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/nuevacita/1/31-12-2010/15" for 127.0.0.1 at Fri Nov 12 13:07:03 -0600 2010
+  Processing by CitasController#create as HTML
+  Parameters: {"hora"=>"15", "placa"=>"1", "fecha"=>"31-12-2010"}
+  [1m[35mVehiculo Load (0.7ms)[0m  SELECT "vehiculos".* FROM "vehiculos" WHERE ("vehiculos"."placa" = '1') LIMIT 1
+Completed   in 59ms
+
+NameError (undefined local variable or method `render_404' for #<CitasController:0x7fa1de2d4420>):
+  app/controllers/citas_controller.rb:65:in `create'
+  app/controllers/citas_controller.rb:63:in `create'
+
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (9.2ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (18.2ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (42.3ms)
+
+
+Started GET "/nuevacita/1/31-12-2010/15" for 127.0.0.1 at Fri Nov 12 13:08:21 -0600 2010
+  Processing by CitasController#create as HTML
+  Parameters: {"hora"=>"15", "placa"=>"1", "fecha"=>"31-12-2010"}
+  [1m[36mVehiculo Load (0.3ms)[0m  [1mSELECT "vehiculos".* FROM "vehiculos" WHERE ("vehiculos"."placa" = '1') LIMIT 1[0m
+Rendered text template (0.0ms)
+Completed 200 OK in 33ms (Views: 1.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/nuevacita/1/31-12-2010/15.xml" for 127.0.0.1 at Fri Nov 12 13:08:29 -0600 2010
+  Processing by CitasController#create as XML
+  Parameters: {"hora"=>"15", "placa"=>"1", "fecha"=>"31-12-2010"}
+  [1m[35mVehiculo Load (0.3ms)[0m  SELECT "vehiculos".* FROM "vehiculos" WHERE ("vehiculos"."placa" = '1') LIMIT 1
+Rendered text template (0.0ms)
+Completed 200 OK in 203ms (Views: 1.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/nuevacita/1/31-12-2010/15.xml" for 127.0.0.1 at Fri Nov 12 13:09:25 -0600 2010
+  Processing by CitasController#create as XML
+  Parameters: {"hora"=>"15", "placa"=>"1", "fecha"=>"31-12-2010"}
+  [1m[36mVehiculo Load (0.8ms)[0m  [1mSELECT "vehiculos".* FROM "vehiculos" WHERE ("vehiculos"."placa" = '1') LIMIT 1[0m
+  [1m[35mVehiculo Load (0.3ms)[0m  SELECT "vehiculos"."id" FROM "vehiculos" WHERE ("vehiculos"."placa" = '1') LIMIT 1
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "vehiculos" ("created_at", "placa", "updated_at") VALUES ('2010-11-12 19:09:26.126363', '1', '2010-11-12 19:09:26.126363')[0m
+Rendered text template (0.0ms)
+Completed 200 OK in 201ms (Views: 2.0ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/nuevacita/1/31-12-2010/15.xml" for 127.0.0.1 at Fri Nov 12 13:10:04 -0600 2010
+  Processing by CitasController#create as XML
+  Parameters: {"hora"=>"15", "placa"=>"1", "fecha"=>"31-12-2010"}
+  [1m[35mVehiculo Load (0.9ms)[0m  SELECT "vehiculos".* FROM "vehiculos" WHERE ("vehiculos"."placa" = '1') LIMIT 1
+Completed   in 40ms
+
+RuntimeError (hello):
+  app/controllers/citas_controller.rb:60:in `create'
+
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (18.0ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (22.9ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (56.7ms)
+
+
+Started GET "/nuevacita/1/31-12-2010/15.xml" for 127.0.0.1 at Fri Nov 12 13:25:10 -0600 2010
+  Processing by CitasController#create as XML
+  Parameters: {"hora"=>"15", "placa"=>"1", "fecha"=>"31-12-2010"}
+  [1m[36mVehiculo Load (0.4ms)[0m  [1mSELECT "vehiculos".* FROM "vehiculos" WHERE ("vehiculos"."placa" = '1') LIMIT 1[0m
+  [1m[35mSQL (0.4ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+Completed   in 242ms
+
+NoMethodError (undefined method `validates_uniqueness' for #<Class:0x7fa1de3ead28>):
+  app/models/cita.rb:7
+  app/controllers/citas_controller.rb:60:in `create'
+
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.8ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (9.3ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (17.0ms)
+
+
+Started GET "/nuevacita/1/31-12-2010/15.xml" for 127.0.0.1 at Fri Nov 12 13:25:26 -0600 2010
+  Processing by CitasController#create as XML
+  Parameters: {"hora"=>"15", "placa"=>"1", "fecha"=>"31-12-2010"}
+  [1m[36mVehiculo Load (0.4ms)[0m  [1mSELECT "vehiculos".* FROM "vehiculos" WHERE ("vehiculos"."placa" = '1') LIMIT 1[0m
+Completed   in 33ms
+
+NoMethodError (undefined method `-' for "31-12-2010":String):
+  app/controllers/citas_controller.rb:60:in `create'
+
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.1ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (10.4ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (19.1ms)
+
+
+Started GET "/nuevacita/1/31-12-2010/15.xml" for 127.0.0.1 at Fri Nov 12 13:26:52 -0600 2010
+  Processing by CitasController#create as XML
+  Parameters: {"hora"=>"15", "placa"=>"1", "fecha"=>"31-12-2010"}
+  [1m[35mVehiculo Load (0.3ms)[0m  SELECT "vehiculos".* FROM "vehiculos" WHERE ("vehiculos"."placa" = '1') LIMIT 1
+  [1m[36mCita Load (0.3ms)[0m  [1mSELECT "citas"."id" FROM "citas" WHERE ("citas"."fecha" = '2010-12-31') AND ("citas"."hora" = 15) LIMIT 1[0m
+Rendered citas/create.xml.builder (2.8ms)
+Completed 200 OK in 318ms (Views: 7.9ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/nuevacita/1/31-12-2010/15.xml" for 127.0.0.1 at Fri Nov 12 13:29:35 -0600 2010
+  Processing by CitasController#create as XML
+  Parameters: {"hora"=>"15", "placa"=>"1", "fecha"=>"31-12-2010"}
+  [1m[35mVehiculo Load (0.3ms)[0m  SELECT "vehiculos".* FROM "vehiculos" WHERE ("vehiculos"."placa" = '1') LIMIT 1
+  [1m[36mCita Load (0.2ms)[0m  [1mSELECT "citas"."id" FROM "citas" WHERE ("citas"."fecha" = '2010-12-31') AND ("citas"."hora" = 15) LIMIT 1[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "citas" ("cliente_id", "created_at", "estados_id", "fecha", "hora", "updated_at") VALUES (1, '2010-11-12 19:29:35.483114', 1, '2010-12-31', 15, '2010-11-12 19:29:35.483114')
+Rendered citas/create.xml.builder (4.8ms)
+Completed   in 197ms
+
+ActionView::Template::Error (undefined method `estado_id' for #<Cita:0x7fa1de0a9f38>):
+    9:     xml.id @cita.id
+    10:     xml.hora @cita.hora
+    11:     xml.cliente_id @cita.cliente_id
+    12:     xml.estados_id @cita.estado_id
+    13:   end
+    14: end
+  app/views/citas/create.xml.builder:12:in `_app_views_citas_create_xml_builder___228909981_70166595598780_0'
+  app/views/citas/create.xml.builder:8:in `_app_views_citas_create_xml_builder___228909981_70166595598780_0'
+  app/controllers/citas_controller.rb:70:in `create'
+
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.1ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (10.6ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (19.7ms)
+
+
+Started GET "/nuevacita/1/31-12-2010/15.xml" for 127.0.0.1 at Fri Nov 12 13:29:44 -0600 2010
+  Processing by CitasController#create as XML
+  Parameters: {"hora"=>"15", "placa"=>"1", "fecha"=>"31-12-2010"}
+  [1m[36mVehiculo Load (0.3ms)[0m  [1mSELECT "vehiculos".* FROM "vehiculos" WHERE ("vehiculos"."placa" = '1') LIMIT 1[0m
+  [1m[35mCita Load (0.3ms)[0m  SELECT "citas"."id" FROM "citas" WHERE ("citas"."fecha" = '2010-12-31') AND ("citas"."hora" = 15) LIMIT 1
+Rendered citas/create.xml.builder (3.2ms)
+Completed 200 OK in 56ms (Views: 7.7ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/nuevacita/1/31-12-2010/5.xml" for 127.0.0.1 at Fri Nov 12 13:30:29 -0600 2010
+  Processing by CitasController#create as XML
+  Parameters: {"hora"=>"5", "placa"=>"1", "fecha"=>"31-12-2010"}
+  [1m[36mVehiculo Load (0.8ms)[0m  [1mSELECT "vehiculos".* FROM "vehiculos" WHERE ("vehiculos"."placa" = '1') LIMIT 1[0m
+  [1m[35mCita Load (0.7ms)[0m  SELECT "citas"."id" FROM "citas" WHERE ("citas"."fecha" = '2010-12-31') AND ("citas"."hora" = 5) LIMIT 1
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "citas" ("cliente_id", "created_at", "estados_id", "fecha", "hora", "updated_at") VALUES (1, '2010-11-12 19:30:29.218532', 1, '2010-12-31', 5, '2010-11-12 19:30:29.218532')[0m
+Rendered citas/create.xml.builder (7.8ms)
+Completed 200 OK in 321ms (Views: 19.5ms | ActiveRecord: 2.5ms)
+
+
+Started GET "/nuevacita/122brw/31-12-2010/5.xml" for 127.0.0.1 at Fri Nov 12 13:35:36 -0600 2010
+  Processing by CitasController#create as XML
+  Parameters: {"hora"=>"5", "placa"=>"122brw", "fecha"=>"31-12-2010"}
+  [1m[35mVehiculo Load (0.3ms)[0m  SELECT "vehiculos".* FROM "vehiculos" WHERE ("vehiculos"."placa" = '122BRW') LIMIT 1
+  [1m[36mVehiculo Load (0.3ms)[0m  [1mSELECT "vehiculos"."id" FROM "vehiculos" WHERE ("vehiculos"."placa" = '122BRW') LIMIT 1[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "vehiculos" ("created_at", "placa", "updated_at") VALUES ('2010-11-12 19:35:36.902925', '122BRW', '2010-11-12 19:35:36.902925')
+  [1m[36mCita Load (0.9ms)[0m  [1mSELECT "citas"."id" FROM "citas" WHERE ("citas"."fecha" = '2010-12-31') AND ("citas"."hora" = 5) LIMIT 1[0m
+Rendered citas/create.xml.builder (8.1ms)
+Completed 200 OK in 216ms (Views: 20.0ms | ActiveRecord: 1.8ms)
+
+
+Started GET "/nuevacita/122brw/31-12-2010/6.xml" for 127.0.0.1 at Fri Nov 12 13:35:44 -0600 2010
+  Processing by CitasController#create as XML
+  Parameters: {"hora"=>"6", "placa"=>"122brw", "fecha"=>"31-12-2010"}
+  [1m[35mVehiculo Load (0.8ms)[0m  SELECT "vehiculos".* FROM "vehiculos" WHERE ("vehiculos"."placa" = '122BRW') LIMIT 1
+  [1m[36mCita Load (1.3ms)[0m  [1mSELECT "citas"."id" FROM "citas" WHERE ("citas"."fecha" = '2010-12-31') AND ("citas"."hora" = 6) LIMIT 1[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "citas" ("cliente_id", "created_at", "estados_id", "fecha", "hora", "updated_at") VALUES (2, '2010-11-12 19:35:44.290501', 1, '2010-12-31', 6, '2010-11-12 19:35:44.290501')
+Rendered citas/create.xml.builder (7.6ms)
+Completed 200 OK in 492ms (Views: 19.2ms | ActiveRecord: 2.5ms)
+
+
+Started GET "/consultarfechahora/31-12-2010/6.xml" for 127.0.0.1 at Fri Nov 12 13:49:35 -0600 2010
+  Processing by CitasController#find as XML
+  Parameters: {"hora"=>"6", "fecha"=>"31-12-2010"}
+  [1m[36mSQL (0.4ms)[0m  [1mSELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "citas" WHERE (fecha = '2010-12-31' and hora = 6)) AS subquery[0m
+Rendered citas/find.xml.builder (3.6ms)
+Completed 200 OK in 34ms (Views: 9.6ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/consultarfechahora/31-12-2010/15.xml" for 127.0.0.1 at Fri Nov 12 13:49:40 -0600 2010
+  Processing by CitasController#find as XML
+  Parameters: {"hora"=>"15", "fecha"=>"31-12-2010"}
+  [1m[35mSQL (0.3ms)[0m  SELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "citas" WHERE (fecha = '2010-12-31' and hora = 15)) AS subquery
+Rendered citas/find.xml.builder (2.9ms)
+Completed 200 OK in 45ms (Views: 7.4ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/consultarfechahora/31-12-2010/5.xml" for 127.0.0.1 at Fri Nov 12 13:49:45 -0600 2010
+  Processing by CitasController#find as XML
+  Parameters: {"hora"=>"5", "fecha"=>"31-12-2010"}
+  [1m[36mSQL (0.9ms)[0m  [1mSELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "citas" WHERE (fecha = '2010-12-31' and hora = 5)) AS subquery[0m
+Rendered citas/find.xml.builder (8.7ms)
+Completed 200 OK in 72ms (Views: 19.4ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/consultarfechahora/31-12-2010/15.xml" for 127.0.0.1 at Fri Nov 12 13:50:06 -0600 2010
+  Processing by CitasController#find as XML
+  Parameters: {"hora"=>"15", "fecha"=>"31-12-2010"}
+  [1m[35mSQL (0.4ms)[0m  SELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "citas" WHERE (fecha = '2010-12-31' and hora = 15)) AS subquery
+Rendered citas/find.xml.builder (3.1ms)
+Completed 200 OK in 30ms (Views: 7.7ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/consultarfechahora/31-12-2010/15.xml" for 127.0.0.1 at Fri Nov 12 13:52:27 -0600 2010
+  Processing by CitasController#find as XML
+  Parameters: {"hora"=>"15", "fecha"=>"31-12-2010"}
+  [1m[36mSQL (0.9ms)[0m  [1mSELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "citas" WHERE (fecha = '2010-12-31' and hora = 15)) AS subquery[0m
+Rendered citas/find.xml.builder (7.5ms)
+Completed 200 OK in 70ms (Views: 19.0ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/consultarfechahora/31-12-2010/15.xml" for 127.0.0.1 at Fri Nov 12 13:54:40 -0600 2010
+  Processing by CitasController#find as XML
+  Parameters: {"hora"=>"15", "fecha"=>"31-12-2010"}
+  [1m[36mSQL (0.9ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.4ms)[0m  SELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "citas" WHERE (fecha = '2010-12-31' and hora = 15)) AS subquery
+Rendered citas/find.xml.builder (38.8ms)
+Completed 200 OK in 206ms (Views: 43.7ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/consultarfechahora/31-12-2010/15.xml" for 127.0.0.1 at Fri Nov 12 13:55:19 -0600 2010
+  Processing by CitasController#find as XML
+  Parameters: {"hora"=>"15", "fecha"=>"31-12-2010"}
+  [1m[36mSQL (0.3ms)[0m  [1mSELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "citas" WHERE (fecha = '2010-12-31' and hora = 15)) AS subquery[0m
+Rendered citas/find.xml.builder (2.9ms)
+Completed 200 OK in 26ms (Views: 7.4ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/consultarfechahora/31-12-2010/10.xml" for 127.0.0.1 at Fri Nov 12 13:55:51 -0600 2010
+  Processing by CitasController#find as XML
+  Parameters: {"hora"=>"10", "fecha"=>"31-12-2010"}
+  [1m[35mSQL (0.8ms)[0m  SELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "citas" WHERE (fecha = '2010-12-31' and hora = 10)) AS subquery
+Rendered citas/find.xml.builder (8.1ms)
+Completed 200 OK in 71ms (Views: 19.9ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/consultarfechahora/31-12-2010/10.xml" for 127.0.0.1 at Fri Nov 12 13:56:42 -0600 2010
+  Processing by CitasController#find as XML
+  Parameters: {"hora"=>"10", "fecha"=>"31-12-2010"}
+  [1m[36mSQL (0.3ms)[0m  [1mSELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "citas" WHERE (fecha = '2010-12-31' and hora = 10)) AS subquery[0m
+Rendered citas/find.xml.builder (3.0ms)
+Completed 200 OK in 29ms (Views: 7.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/consultarfechahora/31-12-2010/15.xml" for 127.0.0.1 at Fri Nov 12 13:56:46 -0600 2010
+  Processing by CitasController#find as XML
+  Parameters: {"hora"=>"15", "fecha"=>"31-12-2010"}
+  [1m[35mSQL (0.9ms)[0m  SELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "citas" WHERE (fecha = '2010-12-31' and hora = 15)) AS subquery
+Rendered citas/find.xml.builder (7.4ms)
+Completed 200 OK in 69ms (Views: 18.6ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/consultarfecha/31-12-2010.xml" for 127.0.0.1 at Fri Nov 12 14:03:16 -0600 2010
+
+ActionController::RoutingError (No route matches "/consultarfecha/31-12-2010.xml"):
+  
+
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.2ms)
+
+
+Started GET "/consultarfecha/31-12-2010.xml" for 127.0.0.1 at Fri Nov 12 14:03:40 -0600 2010
+
+ActionController::RoutingError (No route matches "/consultarfecha/31-12-2010.xml"):
+  
+
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.4ms)
+
+
+Started GET "/consultarfechahora/31-12-2010.xml" for 127.0.0.1 at Fri Nov 12 14:03:45 -0600 2010
+  Processing by CitasController#find as XML
+  Parameters: {"fecha"=>"31-12-2010"}
+  [1m[36mSQL (0.3ms)[0m  [1mSELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "citas" WHERE (fecha = '2010-12-31' and hora = 0)) AS subquery[0m
+Rendered citas/find.xml.builder (3.3ms)
+Completed 200 OK in 189ms (Views: 10.4ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/consultarfechahora/31-12-2010.xml" for 127.0.0.1 at Fri Nov 12 14:10:49 -0600 2010
+  Processing by CitasController#find as XML
+  Parameters: {"fecha"=>"31-12-2010"}
+  [1m[35mCita Load (1.8ms)[0m  SELECT hora FROM "citas" WHERE (fecha = '2010-12-31')
+Completed   in 55ms
+
+RuntimeError ([#<Cita hora: 15>, #<Cita hora: 5>, #<Cita hora: 6>]):
+  app/controllers/citas_controller.rb:55:in `find'
+
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.6ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (7.1ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (14.1ms)
+
+
+Started GET "/consultarfechahora/31-12-2010.xml" for 127.0.0.1 at Fri Nov 12 14:11:19 -0600 2010
+  Processing by CitasController#find as XML
+  Parameters: {"fecha"=>"31-12-2010"}
+  [1m[36mCita Load (0.6ms)[0m  [1mSELECT hora FROM "citas" WHERE (fecha = '2010-12-31')[0m
+Rendered citas/find.xml.builder (103.7ms)
+Completed   in 134ms
+
+ActionView::Template::Error (undefined method `hora' for "8,":String):
+    15:     else
+    16:       xml.fecha do
+    17:         @citas.each do |cita|
+    18:           xml.horas cita.hora
+    19:         end
+    20:       end
+    21:     end
+  app/views/citas/find.xml.builder:18:in `_app_views_citas_find_xml_builder__179200356_70299284607900_0'
+  app/views/citas/find.xml.builder:17:in `each'
+  app/views/citas/find.xml.builder:17:in `_app_views_citas_find_xml_builder__179200356_70299284607900_0'
+  app/views/citas/find.xml.builder:16:in `_app_views_citas_find_xml_builder__179200356_70299284607900_0'
+  app/views/citas/find.xml.builder:8:in `_app_views_citas_find_xml_builder__179200356_70299284607900_0'
+  app/controllers/citas_controller.rb:63:in `find'
+
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.8ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (7.5ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (15.4ms)
+
+
+Started GET "/consultarfechahora/31-12-2010.xml" for 127.0.0.1 at Fri Nov 12 14:11:30 -0600 2010
+  Processing by CitasController#find as XML
+  Parameters: {"fecha"=>"31-12-2010"}
+  [1m[35mCita Load (0.6ms)[0m  SELECT hora FROM "citas" WHERE (fecha = '2010-12-31')
+Rendered citas/find.xml.builder (3.2ms)
+Completed 200 OK in 33ms (Views: 7.7ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/consultarfechahora/31-12-2010.xml" for 127.0.0.1 at Fri Nov 12 14:12:15 -0600 2010
+  Processing by CitasController#find as XML
+  Parameters: {"fecha"=>"31-12-2010"}
+  [1m[36mCita Load (0.7ms)[0m  [1mSELECT hora FROM "citas" WHERE (fecha = '2010-12-31')[0m
+Rendered citas/find.xml.builder (3.4ms)
+Completed 200 OK in 36ms (Views: 8.3ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/consultarfechahora/31-12-2010.xml" for 127.0.0.1 at Fri Nov 12 14:14:03 -0600 2010
+  Processing by CitasController#find as XML
+  Parameters: {"fecha"=>"31-12-2010"}
+  [1m[35mCita Load (0.6ms)[0m  SELECT hora FROM "citas" WHERE (fecha = '2010-12-31')
+Rendered citas/find.xml.builder (2.9ms)
+Completed 200 OK in 36ms (Views: 7.4ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/consultarfechahora/31-12-2010.xml" for 127.0.0.1 at Fri Nov 12 14:15:28 -0600 2010
+  Processing by CitasController#find as XML
+  Parameters: {"fecha"=>"31-12-2010"}
+  [1m[36mCita Load (1.5ms)[0m  [1mSELECT hora FROM "citas" WHERE (fecha = '2010-12-31')[0m
+Completed   in 62ms
+
+NoMethodError (You have a nil object when you didn't expect it!
+You might have expected an instance of ActiveRecord::Base.
+The error occurred while evaluating nil.delete):
+  app/controllers/citas_controller.rb:58:in `find'
+  app/controllers/citas_controller.rb:57:in `find'
+
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.6ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (6.8ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (13.9ms)
+
+
+Started GET "/consultarfechahora/31-12-2010.xml" for 127.0.0.1 at Fri Nov 12 14:19:49 -0600 2010
+
+ActionController::RoutingError (No route matches "/consultarfechahora/31-12-2010.xml"):
+  
+
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (10.4ms)
+
+
+Started GET "/consultarfecha/31-12-2010.xml" for 127.0.0.1 at Fri Nov 12 14:19:55 -0600 2010
+  Processing by CitasController#find as XML
+  Parameters: {"fecha"=>"31-12-2010"}
+  [1m[35mCita Load (0.7ms)[0m  SELECT hora FROM "citas" WHERE (fecha = '2010-12-31')
+Rendered citas/find.xml.builder (3.2ms)
+Completed 200 OK in 38ms (Views: 8.5ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/consultarfecha/31-12-2010.xml" for 127.0.0.1 at Fri Nov 12 14:20:41 -0600 2010
+  Processing by CitasController#find as XML
+  Parameters: {"fecha"=>"31-12-2010"}
+  [1m[36mCita Load (1.6ms)[0m  [1mSELECT hora FROM "citas" WHERE (fecha = '2010-12-31')[0m
+Rendered citas/find.xml.builder (7.9ms)
+Completed 200 OK in 85ms (Views: 19.0ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/consultarfecha/31-12-2010.xml" for 127.0.0.1 at Fri Nov 12 14:21:03 -0600 2010
+  Processing by CitasController#find as XML
+  Parameters: {"fecha"=>"31-12-2010"}
+  [1m[35mCita Load (0.6ms)[0m  SELECT hora FROM "citas" WHERE (fecha = '2010-12-31')
+Rendered citas/find.xml.builder (3.3ms)
+Completed 200 OK in 31ms (Views: 7.8ms | ActiveRecord: 0.6ms)
