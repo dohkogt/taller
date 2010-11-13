@@ -7,8 +7,11 @@ Taller::Application.routes.draw do
   match 'consultarfecha/:fecha(.:format)' => 'main#find_cita'
 
   match 'recibirvehiculo/:cita_id(.:format)' => 'main#create_orden'
+  match 'agregarservicio/:orden_id/:servicio_id(.:format)' => 'main#create_servicio'
+
+  match 'servicio_nombre/:servicio_id(.:format)' => 'testdata#servicio_nombre'
   
-  #resources :serviciorepuestos
+  #resources :serviciorepuestosa
 
   #resources :ordendetalles
 

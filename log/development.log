@@ -789,3 +789,384 @@ Started GET "/recibirvehiculo/1.xml" for 127.0.0.1 at Fri Nov 12 16:03:54 -0600 
   [1m[36mSQL (0.4ms)[0m  [1mSELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "ordenes" WHERE ("ordenes"."cita_id" = 1)) AS subquery[0m
 Rendered main/create_orden.xml.builder (138.0ms)
 Completed 200 OK in 204ms (Views: 142.7ms | ActiveRecord: 3.6ms)
+
+
+Started GET "/agregarservicio/1/1" for 127.0.0.1 at Fri Nov 12 23:17:16 -0600 2010
+  Processing by MainController#create_servicio as HTML
+  Parameters: {"orden_id"=>"1", "servicio_id"=>"1"}
+  [1m[36mSQL (0.9ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mOrden Load (0.4ms)[0m  SELECT "ordenes".* FROM "ordenes" WHERE ("ordenes"."id" = 1) LIMIT 1
+  [1m[36mSQL (0.6ms)[0m  [1mINSERT INTO "ordendetalles" ("created_at", "descripcion", "orden_id", "servicio_id", "updated_at") VALUES ('2010-11-13 05:17:17.735743', 'Algo que describir', 1, 1, '2010-11-13 05:17:17.735743')[0m
+Completed 406 Not Acceptable in 631ms
+
+
+Started GET "/agregarservicio/1/2.xml" for 127.0.0.1 at Fri Nov 12 23:17:33 -0600 2010
+  Processing by MainController#create_servicio as XML
+  Parameters: {"orden_id"=>"1", "servicio_id"=>"2"}
+  [1m[35mOrden Load (0.3ms)[0m  SELECT "ordenes".* FROM "ordenes" WHERE ("ordenes"."id" = 2) LIMIT 1
+Completed   in 20ms
+
+ActiveRecord::RecordNotFound (Couldn't find Orden with ID=2):
+  app/controllers/main_controller.rb:9:in `create_servicio'
+
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.9ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (6.1ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (14.5ms)
+
+
+Started GET "/agregarservicio/1/2.xml" for 127.0.0.1 at Fri Nov 12 23:17:58 -0600 2010
+  Processing by MainController#create_servicio as XML
+  Parameters: {"orden_id"=>"1", "servicio_id"=>"2"}
+  [1m[36mOrden Load (0.4ms)[0m  [1mSELECT "ordenes".* FROM "ordenes" WHERE ("ordenes"."id" = 1) LIMIT 1[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "ordendetalles" ("created_at", "descripcion", "orden_id", "servicio_id", "updated_at") VALUES ('2010-11-13 05:17:58.805118', 'Algo que describir', 1, 2, '2010-11-13 05:17:58.805118')
+Rendered main/create_servicio.xml.builder (163.0ms)
+Completed 200 OK in 509ms (Views: 203.4ms | ActiveRecord: 3.0ms)
+
+
+Started GET "/agregarservicio/1/2.xml" for 127.0.0.1 at Fri Nov 12 23:18:11 -0600 2010
+  Processing by MainController#create_servicio as XML
+  Parameters: {"orden_id"=>"1", "servicio_id"=>"2"}
+  [1m[36mOrden Load (0.3ms)[0m  [1mSELECT "ordenes".* FROM "ordenes" WHERE ("ordenes"."id" = 1) LIMIT 1[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "ordendetalles" ("created_at", "descripcion", "orden_id", "servicio_id", "updated_at") VALUES ('2010-11-13 05:18:12.079594', 'Algo que describir', 1, 2, '2010-11-13 05:18:12.079594')
+Rendered main/create_servicio.xml.builder (3.2ms)
+Completed 200 OK in 167ms (Views: 9.2ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/agregarservicio/1/2.xml" for 127.0.0.1 at Fri Nov 12 23:19:31 -0600 2010
+  Processing by MainController#create_servicio as XML
+  Parameters: {"orden_id"=>"1", "servicio_id"=>"2"}
+  [1m[36mOrden Load (0.5ms)[0m  [1mSELECT "ordenes".* FROM "ordenes" WHERE ("ordenes"."id" = 1) LIMIT 1[0m
+  [1m[35mOrdendetalle Load (0.5ms)[0m  SELECT "ordendetalles"."id" FROM "ordendetalles" WHERE ("ordendetalles"."servicio_id" = 2) AND ("ordendetalles"."orden_id" = 1) LIMIT 1
+Completed   in 141ms
+
+NoMethodError (undefined method `erros' for #<Ordendetalle:0x7f224c983e40>):
+  app/controllers/main_controller.rb:15:in `create_servicio'
+
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.0ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (9.7ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (18.3ms)
+
+
+Started GET "/agregarservicio/1/2.xml" for 127.0.0.1 at Fri Nov 12 23:19:40 -0600 2010
+  Processing by MainController#create_servicio as XML
+  Parameters: {"orden_id"=>"1", "servicio_id"=>"2"}
+  [1m[36mOrden Load (0.3ms)[0m  [1mSELECT "ordenes".* FROM "ordenes" WHERE ("ordenes"."id" = 1) LIMIT 1[0m
+  [1m[35mOrdendetalle Load (0.3ms)[0m  SELECT "ordendetalles"."id" FROM "ordendetalles" WHERE ("ordendetalles"."servicio_id" = 2) AND ("ordendetalles"."orden_id" = 1) LIMIT 1
+Rendered main/create_servicio.xml.builder (3.3ms)
+Completed 200 OK in 180ms (Views: 121.1ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/nombre_servicio/1.xml" for 127.0.0.1 at Fri Nov 12 23:28:46 -0600 2010
+
+ActionController::RoutingError (No route matches "/nombre_servicio/1.xml"):
+  
+
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.9ms)
+
+
+Started GET "/servicio_nombre/1.xml" for 127.0.0.1 at Fri Nov 12 23:29:16 -0600 2010
+  Processing by TestdataController#servicio_nombre as XML
+  Parameters: {"servicio_id"=>"1"}
+Completed   in 3ms
+
+NameError (uninitialized constant TestdataController::Faker):
+  app/controllers/testdata_controller.rb:4:in `servicio_nombre'
+
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.7ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (5.8ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (13.1ms)
+
+
+Started GET "/servicio_nombre/1.xml" for 127.0.0.1 at Fri Nov 12 23:29:43 -0600 2010
+  Processing by TestdataController#servicio_nombre as XML
+  Parameters: {"servicio_id"=>"1"}
+Rendered testdata/servicio_nombre.xml.builder (150.8ms)
+Completed   in 159ms
+
+NoMethodError (undefined method `xml' for #<String:0x7f5e1681dd70>):
+  app/controllers/testdata_controller.rb:6:in `servicio_nombre'
+  app/controllers/testdata_controller.rb:5:in `servicio_nombre'
+
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.1ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (8.7ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (18.0ms)
+
+
+Started GET "/servicio_nombre/1.xml" for 127.0.0.1 at Fri Nov 12 23:30:44 -0600 2010
+  Processing by TestdataController#servicio_nombre as XML
+  Parameters: {"servicio_id"=>"1"}
+Rendered testdata/servicio_nombre.xml.builder (2.9ms)
+Completed 200 OK in 14ms (Views: 8.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/servicio_nombre/1.xml" for 127.0.0.1 at Fri Nov 12 23:30:57 -0600 2010
+  Processing by TestdataController#servicio_nombre as XML
+  Parameters: {"servicio_id"=>"1"}
+Rendered testdata/servicio_nombre.xml.builder (4.3ms)
+Completed 200 OK in 10ms (Views: 8.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/servicio_nombre/1.xml" for 127.0.0.1 at Fri Nov 12 23:30:59 -0600 2010
+  Processing by TestdataController#servicio_nombre as XML
+  Parameters: {"servicio_id"=>"1"}
+Rendered testdata/servicio_nombre.xml.builder (3.1ms)
+Completed 200 OK in 24ms (Views: 18.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/servicio_nombre/1.xml" for 127.0.0.1 at Fri Nov 12 23:31:20 -0600 2010
+  Processing by TestdataController#servicio_nombre as XML
+  Parameters: {"servicio_id"=>"1"}
+Rendered testdata/servicio_nombre.xml.builder (3.4ms)
+Completed 200 OK in 10ms (Views: 8.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/agregarservicio/1/2.xml" for 127.0.0.1 at Fri Nov 12 23:32:51 -0600 2010
+  Processing by MainController#create_servicio as XML
+  Parameters: {"orden_id"=>"1", "servicio_id"=>"2"}
+  [1m[36mSQL (0.9ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mOrden Load (1.5ms)[0m  SELECT "ordenes".* FROM "ordenes" WHERE ("ordenes"."id" = 1) LIMIT 1
+Completed   in 76ms
+
+Errno::ECONNREFUSED (Connection refused - connect(2)):
+  app/controllers/main_controller.rb:17:in `create_servicio'
+
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.7ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (9.7ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (16.9ms)
+
+
+Started GET "/agregarservicio/1/2.xml" for 127.0.0.1 at Fri Nov 12 23:33:20 -0600 2010
+  Processing by MainController#create_servicio as XML
+  Parameters: {"orden_id"=>"1", "servicio_id"=>"2"}
+  [1m[36mOrden Load (2.6ms)[0m  [1mSELECT "ordenes".* FROM "ordenes" WHERE ("ordenes"."id" = 1) LIMIT 1[0m
+Completed   in 60038ms
+
+Timeout::Error (execution expired):
+  app/controllers/main_controller.rb:17:in `create_servicio'
+
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (4.9ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (53.0ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (74.6ms)
+
+
+Started GET "/servicio_nombre/2.xml" for 127.0.0.1 at Fri Nov 12 23:34:20 -0600 2010
+  Processing by TestdataController#servicio_nombre as XML
+  Parameters: {"servicio_id"=>"2"}
+Rendered testdata/servicio_nombre.xml.builder (3.6ms)
+Completed 200 OK in 11ms (Views: 9.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/servicio_nombre/1.xml" for 127.0.0.1 at Fri Nov 12 23:34:29 -0600 2010
+  Processing by TestdataController#servicio_nombre as XML
+  Parameters: {"servicio_id"=>"1"}
+Rendered testdata/servicio_nombre.xml.builder (3.3ms)
+Completed 200 OK in 9ms (Views: 7.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/agregarservicio/1/2.xml" for 127.0.0.1 at Fri Nov 12 23:35:44 -0600 2010
+  Processing by MainController#create_servicio as XML
+  Parameters: {"orden_id"=>"1", "servicio_id"=>"2"}
+  [1m[35mOrden Load (0.4ms)[0m  SELECT "ordenes".* FROM "ordenes" WHERE ("ordenes"."id" = 1) LIMIT 1
+Completed   in 60163ms
+
+Timeout::Error (execution expired):
+  app/controllers/main_controller.rb:17:in `create_servicio'
+
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (7.5ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (32.1ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (60.4ms)
+
+
+Started GET "/servicio_nombre/2.xml" for 127.0.0.1 at Fri Nov 12 23:36:44 -0600 2010
+  Processing by TestdataController#servicio_nombre as XML
+  Parameters: {"servicio_id"=>"2"}
+Rendered testdata/servicio_nombre.xml.builder (3.9ms)
+Completed 200 OK in 11ms (Views: 9.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/agregarservicio/1/2.xml" for 127.0.0.1 at Fri Nov 12 23:36:44 -0600 2010
+  Processing by MainController#create_servicio as XML
+  Parameters: {"orden_id"=>"1", "servicio_id"=>"2"}
+  [1m[36mOrden Load (1.8ms)[0m  [1mSELECT "ordenes".* FROM "ordenes" WHERE ("ordenes"."id" = 1) LIMIT 1[0m
+Completed   in 40798ms
+
+
+Started GET "/servicio_nombre/1.xml" for 127.0.0.1 at Fri Nov 12 23:39:12 -0600 2010
+  Processing by TestdataController#servicio_nombre as XML
+  Parameters: {"servicio_id"=>"1"}
+Rendered testdata/servicio_nombre.xml.builder (123.4ms)
+Completed 200 OK in 129ms (Views: 127.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/servicio_nombre/1.xml" for 127.0.0.1 at Fri Nov 12 23:39:33 -0600 2010
+  Processing by TestdataController#servicio_nombre as XML
+  Parameters: {"servicio_id"=>"1"}
+Rendered testdata/servicio_nombre.xml.builder (8.8ms)
+Completed 200 OK in 31ms (Views: 25.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/agregarservicio/1/2.xml" for 127.0.0.1 at Fri Nov 12 23:40:15 -0600 2010
+  Processing by MainController#create_servicio as XML
+  Parameters: {"orden_id"=>"1", "servicio_id"=>"2"}
+  [1m[36mSQL (1.3ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mOrden Load (0.3ms)[0m  SELECT "ordenes".* FROM "ordenes" WHERE ("ordenes"."id" = 1) LIMIT 1
+Completed   in 60083ms
+
+Timeout::Error (execution expired):
+  app/controllers/main_controller.rb:18:in `create_servicio'
+
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (4.7ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (29.9ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (164.9ms)
+
+
+Started GET "/servicio_nombre/2.xml" for 127.0.0.1 at Fri Nov 12 23:41:16 -0600 2010
+  Processing by TestdataController#servicio_nombre as XML
+  Parameters: {"servicio_id"=>"2"}
+Rendered testdata/servicio_nombre.xml.builder (3.3ms)
+Completed 200 OK in 13ms (Views: 10.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/agregarservicio/1/2.xml" for 127.0.0.1 at Fri Nov 12 23:41:16 -0600 2010
+  Processing by MainController#create_servicio as XML
+  Parameters: {"orden_id"=>"1", "servicio_id"=>"2"}
+  [1m[36mOrden Load (0.3ms)[0m  [1mSELECT "ordenes".* FROM "ordenes" WHERE ("ordenes"."id" = 1) LIMIT 1[0m
+
+
+Started GET "/servicio_nombre/2.xml" for 127.0.0.1 at Fri Nov 12 23:41:16 -0600 2010
+  Processing by TestdataController#servicio_nombre as XML
+  Parameters: {"servicio_id"=>"2"}
+Rendered testdata/servicio_nombre.xml.builder (123.7ms)
+Completed 200 OK in 130ms (Views: 128.1ms | ActiveRecord: 0.0ms)
+Completed   in 1365ms
+
+RuntimeError (#<Nokogiri::XML::Document:0x3fc922332cfc name="document" children=[#<Nokogiri::XML::Element:0x3fc922332824 name="servicio_nombre" children=[#<Nokogiri::XML::Text:0x3fc922332004 "\n  ">, #<Nokogiri::XML::Element:0x3fc922331f3c name="id" children=[#<Nokogiri::XML::Text:0x3fc922331884 "1">]>, #<Nokogiri::XML::Text:0x3fc92233171c "\n  ">, #<Nokogiri::XML::Element:0x3fc922331690 name="nombre" children=[#<Nokogiri::XML::Text:0x3fc922331398 "Suscipit autem sit qui delectus omnis harum unde.">]>, #<Nokogiri::XML::Text:0x3fc922331230 "\n">]>]>):
+  app/controllers/main_controller.rb:20:in `create_servicio'
+
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.7ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (9.8ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (17.3ms)
+
+
+Started GET "/agregarservicio/1/2.xml" for 127.0.0.1 at Fri Nov 12 23:41:33 -0600 2010
+  Processing by MainController#create_servicio as XML
+  Parameters: {"orden_id"=>"1", "servicio_id"=>"2"}
+  [1m[35mOrden Load (0.4ms)[0m  SELECT "ordenes".* FROM "ordenes" WHERE ("ordenes"."id" = 1) LIMIT 1
+
+
+Started GET "/servicio_nombre/2.xml" for 127.0.0.1 at Fri Nov 12 23:41:33 -0600 2010
+  Processing by TestdataController#servicio_nombre as XML
+  Parameters: {"servicio_id"=>"2"}
+Rendered testdata/servicio_nombre.xml.builder (3.1ms)
+Completed 200 OK in 9ms (Views: 7.7ms | ActiveRecord: 0.0ms)
+Completed   in 192ms
+
+RuntimeError (hello):
+  app/controllers/main_controller.rb:23:in `create_servicio'
+
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.0ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (14.7ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (23.2ms)
+
+
+Started GET "/agregarservicio/1/2.xml" for 127.0.0.1 at Fri Nov 12 23:42:31 -0600 2010
+  Processing by MainController#create_servicio as XML
+  Parameters: {"orden_id"=>"1", "servicio_id"=>"2"}
+  [1m[36mOrden Load (0.3ms)[0m  [1mSELECT "ordenes".* FROM "ordenes" WHERE ("ordenes"."id" = 1) LIMIT 1[0m
+
+
+Started GET "/servicio_nombre/2.xml" for 127.0.0.1 at Fri Nov 12 23:42:31 -0600 2010
+  Processing by TestdataController#servicio_nombre as XML
+  Parameters: {"servicio_id"=>"2"}
+Rendered testdata/servicio_nombre.xml.builder (2.9ms)
+Completed 200 OK in 9ms (Views: 7.3ms | ActiveRecord: 0.0ms)
+id: servicio.at_css('id')
+Completed   in 80ms
+
+RuntimeError (hello):
+  app/controllers/main_controller.rb:23:in `create_servicio'
+
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.6ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (10.4ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (17.5ms)
+
+
+Started GET "/agregarservicio/1/2.xml" for 127.0.0.1 at Fri Nov 12 23:43:16 -0600 2010
+  Processing by MainController#create_servicio as XML
+  Parameters: {"orden_id"=>"1", "servicio_id"=>"2"}
+  [1m[35mOrden Load (0.3ms)[0m  SELECT "ordenes".* FROM "ordenes" WHERE ("ordenes"."id" = 1) LIMIT 1
+
+
+Started GET "/servicio_nombre/2.xml" for 127.0.0.1 at Fri Nov 12 23:43:16 -0600 2010
+  Processing by TestdataController#servicio_nombre as XML
+  Parameters: {"servicio_id"=>"2"}
+Rendered testdata/servicio_nombre.xml.builder (3.6ms)
+Completed 200 OK in 11ms (Views: 9.7ms | ActiveRecord: 0.0ms)
+id: 1
+Completed   in 187ms
+
+RuntimeError (hello):
+  app/controllers/main_controller.rb:23:in `create_servicio'
+
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.8ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (11.8ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (19.5ms)
+
+
+Started GET "/agregarservicio/1/2.xml" for 127.0.0.1 at Fri Nov 12 23:45:23 -0600 2010
+  Processing by MainController#create_servicio as XML
+  Parameters: {"orden_id"=>"1", "servicio_id"=>"2"}
+  [1m[36mOrden Load (0.3ms)[0m  [1mSELECT "ordenes".* FROM "ordenes" WHERE ("ordenes"."id" = 1) LIMIT 1[0m
+
+
+Started GET "/servicio_nombre/2.xml" for 127.0.0.1 at Fri Nov 12 23:45:23 -0600 2010
+  Processing by TestdataController#servicio_nombre as XML
+  Parameters: {"servicio_id"=>"2"}
+Rendered testdata/servicio_nombre.xml.builder (4.1ms)
+Completed 200 OK in 11ms (Views: 9.0ms | ActiveRecord: 0.0ms)
+  [1m[35mOrdendetalle Load (0.5ms)[0m  SELECT "ordendetalles"."id" FROM "ordendetalles" WHERE ("ordendetalles"."servicio_id" = 2) AND ("ordendetalles"."orden_id" = 1) LIMIT 1
+Rendered main/create_servicio.xml.builder (3.3ms)
+Completed 200 OK in 171ms (Views: 7.7ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/agregarservicio/1/3.xml" for 127.0.0.1 at Fri Nov 12 23:46:19 -0600 2010
+  Processing by MainController#create_servicio as XML
+  Parameters: {"orden_id"=>"1", "servicio_id"=>"3"}
+  [1m[36mOrden Load (0.3ms)[0m  [1mSELECT "ordenes".* FROM "ordenes" WHERE ("ordenes"."id" = 1) LIMIT 1[0m
+
+
+Started GET "/servicio_nombre/3.xml" for 127.0.0.1 at Fri Nov 12 23:46:19 -0600 2010
+  Processing by TestdataController#servicio_nombre as XML
+  Parameters: {"servicio_id"=>"3"}
+Rendered testdata/servicio_nombre.xml.builder (4.6ms)
+Completed 200 OK in 12ms (Views: 10.5ms | ActiveRecord: 0.0ms)
+  [1m[35mOrdendetalle Load (0.2ms)[0m  SELECT "ordendetalles"."id" FROM "ordendetalles" WHERE ("ordendetalles"."servicio_id" = 3) AND ("ordendetalles"."orden_id" = 1) LIMIT 1
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "ordendetalles" ("created_at", "descripcion", "orden_id", "servicio_id", "updated_at") VALUES ('2010-11-13 05:46:19.719044', '<nombre>Non incidunt autem sed.</nombre>', 1, 3, '2010-11-13 05:46:19.719044')[0m
+Rendered main/create_servicio.xml.builder (8.3ms)
+Completed 200 OK in 388ms (Views: 22.6ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/agregarservicio/1/4.xml" for 127.0.0.1 at Fri Nov 12 23:47:13 -0600 2010
+  Processing by MainController#create_servicio as XML
+  Parameters: {"orden_id"=>"1", "servicio_id"=>"4"}
+  [1m[35mOrden Load (0.3ms)[0m  SELECT "ordenes".* FROM "ordenes" WHERE ("ordenes"."id" = 1) LIMIT 1
+
+
+Started GET "/servicio_nombre/4.xml" for 127.0.0.1 at Fri Nov 12 23:47:13 -0600 2010
+  Processing by TestdataController#servicio_nombre as XML
+  Parameters: {"servicio_id"=>"4"}
+Rendered testdata/servicio_nombre.xml.builder (3.0ms)
+Completed 200 OK in 9ms (Views: 7.6ms | ActiveRecord: 0.0ms)
+  [1m[36mOrdendetalle Load (0.3ms)[0m  [1mSELECT "ordendetalles"."id" FROM "ordendetalles" WHERE ("ordendetalles"."servicio_id" = 4) AND ("ordendetalles"."orden_id" = 1) LIMIT 1[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "ordendetalles" ("created_at", "descripcion", "orden_id", "servicio_id", "updated_at") VALUES ('2010-11-13 05:47:13.880423', 'Earum corporis pariatur et laborum provident illum.', 1, 4, '2010-11-13 05:47:13.880423')
+Rendered main/create_servicio.xml.builder (3.8ms)
+Completed 200 OK in 410ms (Views: 9.6ms | ActiveRecord: 1.0ms)

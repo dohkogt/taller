@@ -1,4 +1,50 @@
+require 'rubygems'
+require 'nokogiri'
+require 'open-uri'
+
 class MainController < ApplicationController
+
+  # GET http://localhost:3000/agregarservicio/123/456.xml
+  def create_servicio
+    i_orden_id = params[:orden_id]
+    i_servicio_id = params[:servicio_id]
+
+    #revisar que orden exista    
+    if (@orden = Orden.find(i_orden_id))
+
+      #pedir description del servicio
+      url_servicio = "http://localhost:3001/servicio_nombre/#{i_servicio_id}.xml"
+      puts url_servicio
+      servicio = Nokogiri::XML(open(url_servicio))
+
+      if servicio.at_css('error').nil?
+        nombre = servicio.at_css('nombre').text
+       
+        @ordendetalle = Ordendetalle.new(:orden_id => @orden.id,
+                                         :servicio_id => i_servicio_id,
+                                         :descripcion => nombre)
+        unless @ordendetalle.save
+          @error_code = 500
+          @error_description = "Error al agregar servicio. #{@ordendetalle.errors}"
+          logger.debug { "Error: #{@ordendetalle.errors}" }
+        end
+      else
+        @error_code = 500
+        @error_description = "Error al obtener servicio."
+      end
+    else
+      @error_code = 500
+      @error_description = "Numero de orden invalido."
+    end
+
+    respond_to do |format|
+      format.xml
+    end
+    
+  end
+  
+  # GET http://localhost:3000/recibirvehiculo/123.xml
+  # cita_id = 123
   def create_orden
     i_cita_id = params[:cita_id]
 
